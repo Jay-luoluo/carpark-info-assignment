@@ -41,6 +41,7 @@ public class BatchConfiguration {
     @Bean
     public FlatFileItemReader<CarPark> reader() {
         FlatFileItemReader<CarPark> reader = new FlatFileItemReader<>();
+        reader.setLinesToSkip(1);
         reader.setResource(new ClassPathResource("hdb-carpark-information-20220824010400.csv")); // Path to your CSV file
         reader.setLineMapper(new DefaultLineMapper<CarPark>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
