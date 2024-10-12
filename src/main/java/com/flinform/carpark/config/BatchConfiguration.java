@@ -30,6 +30,7 @@ import java.sql.SQLException;
 @Configuration
 public class BatchConfiguration {
 
+
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -104,6 +105,11 @@ public class BatchConfiguration {
                 .build();
     }
 
+    /**
+     * Job to import car park data
+     * the second approach
+     * @return
+     */
     @Bean
     public Job importCarParkJob() {
         return jobBuilderFactory.get("importCarParkJob")
