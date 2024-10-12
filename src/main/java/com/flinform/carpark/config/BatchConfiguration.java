@@ -30,6 +30,7 @@ import java.sql.SQLException;
 @Configuration
 public class BatchConfiguration {
 
+
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -41,6 +42,7 @@ public class BatchConfiguration {
     @Bean
     public FlatFileItemReader<CarPark> reader() {
         FlatFileItemReader<CarPark> reader = new FlatFileItemReader<>();
+        reader.setLinesToSkip(1);
         reader.setResource(new ClassPathResource("hdb-carpark-information-20220824010400.csv")); // Path to your CSV file
         reader.setLineMapper(new DefaultLineMapper<CarPark>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
@@ -103,6 +105,11 @@ public class BatchConfiguration {
                 .build();
     }
 
+    /**
+     * Job to import car park data
+     * the second approach
+     * @return
+     */
     @Bean
     public Job importCarParkJob() {
         return jobBuilderFactory.get("importCarParkJob")

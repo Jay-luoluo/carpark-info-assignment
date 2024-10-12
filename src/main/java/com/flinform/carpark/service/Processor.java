@@ -31,6 +31,9 @@ public class Processor {
         importDataFromCSV();
     }
 
+    /**
+     * the first approach
+     */
     private static void importDataFromCSV() {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
             connection.setAutoCommit(false);
@@ -47,7 +50,6 @@ public class Processor {
                     while ((values = csvReader.readNext()) != null) {
                         // Mapping each CSV column to the appropriate table column
                         setParameters(preparedStatement, values);
-
                         // Execute the query
                         preparedStatement.addBatch();  // Add to batch for efficiency
                     }
